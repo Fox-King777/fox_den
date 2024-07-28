@@ -7,3 +7,4 @@ graphviz
 lightgbm
 black
 pylint
+pre-commit
