@@ -1,0 +1,9 @@
+jupyterlab
+pandas
+numpy
+scipy
+matplotlib
+graphviz
+lightgbm
+black
+pylint
