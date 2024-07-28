@@ -9,8 +9,6 @@ git config --global user.email "${useremail}"
 git config --global core.editor vim
 
 git config --local core.untrackedCache true
-git config --local core.hooksPath tools/git_hooks/
-git config --local commit.template tools/git_hooks/git_message.txt
 git config --global alias.co checkout
 git config --global alias.br "branch -v"
 git config --global alias.ci commit
