@@ -2,6 +2,7 @@
 torch
 torchvision
 torchaudio
+jupyter
 jupyterlab
 pandas
 numpy
