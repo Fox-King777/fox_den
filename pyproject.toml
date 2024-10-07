@@ -40,19 +40,37 @@ target-version = "py38"
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
 # Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
 # McCabe complexity (`C901`) by default.
-select = ["E4", "E7", "E9", "F"]
-ignore = []
+select = ["E4", "E7", "E9", "F", "D", "I"]
+ignore = [
+    "E402", # Module level import not at top of file
+    "E501", # Line too long (covered by black)
+    "F811", # Redefinition of unused
+    "F402", # Import _ from line x shadowed by loop variable
+    "D100", # We don't require docstrings
+    "D101", # We don't require docstrings
+    "D102", # We don't require docstrings
+    "D103", # We don't require docstrings
+    "D104", # We don't require docstrings
+    "D105", # We don't require docstrings
+    "D106", # We don't require docstrings
+    "D107", # We don't require docstrings
+]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
-unfixable = []
+unfixable = [
+    # Do not auto-fix E711 and E712 because sqlalchemy relies on == and !=
+    # operators for filtering.
+    "E711", # (none-comparison)
+    "E712", # (true-false-comparison)
+]
+pydocstyle.convention = "google"
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.format]
-# Like Black, use double quotes for strings.
-quote-style = "double"
+quote-style = "single"
 
 # Like Black, indent with spaces, rather than tabs.
 indent-style = "space"
