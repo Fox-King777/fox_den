@@ -9,7 +9,7 @@ scipy
 matplotlib
 graphviz
 lightgbm
-black
 pylint
 pre-commit
 kaggle-environments>=0.1.6
+ruff
