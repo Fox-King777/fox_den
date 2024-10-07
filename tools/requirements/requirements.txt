@@ -12,3 +12,4 @@ lightgbm
 black
 pylint
 pre-commit
+kaggle-environments>=0.1.6
