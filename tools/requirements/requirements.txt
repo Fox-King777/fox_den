@@ -12,5 +12,8 @@ graphviz
 lightgbm
 pylint
 pre-commit
-kaggle-environments>=0.1.6
+kaggle-environments==0.1.6
 ruff
+termcolor
+ipywidgets
+pygame
