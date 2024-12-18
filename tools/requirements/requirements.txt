@@ -5,7 +5,7 @@ torchaudio
 jupyter
 jupyterlab
 pandas
-numpy
+numpy == 1.23.5
 scipy
 matplotlib
 graphviz
@@ -17,3 +17,4 @@ ruff
 termcolor
 ipywidgets
 pygame
+gym[classic_control]
