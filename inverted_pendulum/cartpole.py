@@ -4,18 +4,19 @@ Copied from http://incompleteideas.net/sutton/book/code/pole.c
 permalink: https://perma.cc/C9ZM-652R
 """
 
-import math
-from typing import Optional, Union
+from __future__ import annotations
 
-import numpy as np
+import math
 
 import gym
+import numpy as np
+import pygame
 from gym import logger, spaces
 from gym.envs.classic_control import utils
-from gym.error import DependencyNotInstalled
+from pygame import gfxdraw
 
 
-class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
+class CartPoleEnv(gym.Env[np.ndarray, int | np.ndarray]):
     """This environment corresponds to the version of the cart-pole problem described by Barto, Sutton, and Anderson in ["Neuronlike Adaptive Elements That Can Solve Difficult Learning Control Problem"](https://ieeexplore.ieee.org/document/6313077).
 
     A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track.
@@ -84,7 +85,7 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
         'render_fps': 60,
     }
 
-    def __init__(self, render_mode: Optional[str] = None):
+    def __init__(self, render_mode: str | None = None):
         self.gravity = 9.8
         self.masscart = 1.0
         self.masspole = 0.1
@@ -96,7 +97,7 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
         self.kinematics_integrator = 'euler'
 
         # Angle at which to fail the episode
-        self.theta_threshold_radians = 180 * 2 * math.pi / 360
+        self.theta_threshold_radians = 12 * 2 * math.pi / 360
         self.x_threshold = 2.4
 
         # Angle limit set to 2 * theta_threshold_radians so failing observation
@@ -186,16 +187,16 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
     def reset(
         self,
         *,
-        seed: Optional[int] = None,
-        options: Optional[dict] = None,
+        seed: int | None = None,
+        options: dict | None = None,
     ):
         super().reset(seed=seed)
         # Note that if you use custom reset bounds, it may lead to out-of-bound
         # state/observations.
         low, high = utils.maybe_parse_reset_bounds(
             options,
-            -0.5,
-            0.5,  # default low
+            -0.05,
+            0.05,  # default low
         )  # default high
         self.state = self.np_random.uniform(low=low, high=high, size=(4,))
         self.steps_beyond_terminated = None
@@ -211,15 +212,7 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
                 'You can specify the render_mode at initialization, '
                 f'e.g. gym("{self.spec.id}", render_mode="rgb_array")'
             )
-            return
-
-        try:
-            import pygame
-            from pygame import gfxdraw
-        except ImportError:
-            raise DependencyNotInstalled(
-                'pygame is not installed, run `pip install gym[classic_control]`'
-            )
+            return None
 
         if self.screen is None:
             pygame.init()

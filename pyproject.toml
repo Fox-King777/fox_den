@@ -1,73 +1,126 @@
 [tool.ruff]
-# Exclude a variety of commonly ignored directories.
-exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".git-rewrite",
-    ".hg",
-    ".ipynb_checkpoints",
-    ".mypy_cache",
-    ".nox",
-    ".pants.d",
-    ".pyenv",
-    ".pytest_cache",
-    ".pytype",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    ".vscode",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "dist",
-    "node_modules",
-    "site-packages",
-    "venv",
-]
-
-# Same as Black.
+target-version = "py311"
 line-length = 100
 indent-width = 4
-target-version = "py311"
+output-format = "pylint"
+fix = true
+show-fixes = true
+
+[tool.ruff.lint.per-file-ignores]
 
 [tool.ruff.lint]
-# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
-# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
-# McCabe complexity (`C901`) by default.
-select = ["E4", "E7", "E9", "F", "D", "I"]
+select = [
+    "A", # flake8-builtins
+    "B", # flake8-bugbear
+    "ASYNC", # flake8-async
+    "D", # pydocstyle
+    "E", # pycodestyle
+    "ERA", # eradicate
+    "F", # pyflakes
+    "I", # isort
+    "N", # pep8-naming
+    "PGH004", # blanket-noqa
+    "PL", # pylint
+    "RET", # flake8-return
+    "RSE", # flake8-raise
+    "RUF", # Ruff-specific rules
+    "S", # flake8-bandit
+    "SIM", # flake8-simplify
+    "SLF", # flake8-self
+    "TD", # flake8-todos
+    "TID", # flake8-tidy-imports
+    "TRY", # tryceratops
+    "UP", # pyupgrade
+]
+
 ignore = [
-    "E402", # Module level import not at top of file
-    "E501", # Line too long (covered by black)
-    "F811", # Redefinition of unused
-    "F402", # Import _ from line x shadowed by loop variable
-    "D100", # We don't require docstrings
-    "D101", # We don't require docstrings
-    "D102", # We don't require docstrings
-    "D103", # We don't require docstrings
-    "D104", # We don't require docstrings
-    "D105", # We don't require docstrings
-    "D106", # We don't require docstrings
-    "D107", # We don't require docstrings
+    "B005", # strip-with-multi-characters
+    "B008", # function-call-in-default-argument
+    "B010", # set-attr-with-constant
+    "B015", # useless-comparison
+    "B017", # assert-raises-exception
+    "B018", # useless-expression
+    "B019", # cached-instance-method
+    "B023", # function-uses-loop-variable
+    "B028", # no-explicit-stacklevel
+    "B905", # zip-without-explicit-strict
+    "E402", # module-import-not-at-top-of-file
+    "E501", # line-too-long
+    "F811", # redefined-while-unused
+    "F402", # import-shadowed-by-loop-var
+    "D100", # undocumented-public-module
+    "D101", # undocumented-public-class
+    "D102", # undocumented-public-method
+    "D103", # undocumented-public-function
+    "D104", # undocumented-public-package
+    "D105", # undocumented-magic-method
+    "D106", # undocumented-public-nested-class
+    "D107", # undocumented-public-init
+    "N802", # invalid-function-name
+    "N804", # invalid-first-argument-name-for-class-method
+    "N805", # invalid-first-argument-name-for-method
+    "N806", # non-lowercase-variable-in-function
+    "N812", # lowercase-imported-as-non-lowercase
+    "N817", # camelcase-imported-as-acronym
+    "N818", # error-suffix-on-exception-name
+    "PLW0127", # self-assigning-variable
+    "PLW0602", # global-variable-not-assigned
+    "PLW0603", # global-statement
+    "PLW2901", # redefined-loop-name
+    "PLR0124", # comparison-with-itself
+    "PLR0402", # manual-from-import
+    "PLR0911", # too-many-return-statements
+    "PLR0912", # too-many-branches
+    "PLR0913", # too-many-arguments
+    "PLR0915", # too-many-statements
+    "PLR2004", # magic-value-comparison
+    "RUF001", # ambiguous-unicode-character-string
+    "RUF002", # ambiguous-unicode-character-docstring
+    "RUF003", # ambiguous-unicode-character-comment
+    "RUF005", # collection-literal-concatenation
+    "RUF009", # function-call-in-dataclass-default-argument
+    "RUF010", # explicit-f-string-type-conversion
+    "RUF012", # mutable-class-default
+    "S101", # assert
+    "S104", # hardcoded-bind-all-interfaces
+    "S105", # hardcoded-password-string
+    "S106", # hardcoded-password-func-arg
+    "S107", # hardcoded-password-default
+    "S113", # request-without-timeout
+    "S201", # flask-debug-true
+    "S301", # suspicious-pickle-usage
+    "S306", # suspicious-mktemp-usage
+    "S307", # suspicious-eval-usage
+    "S308", # suspicious-mark-safe-usage
+    "S310", # suspicious-url-open-usage
+    "S311", # suspicious-non-cryptographic-random-usage
+    "S314", # suspicious-xml-element-tree-usage
+    "S318", # suspicious-xml-mini-dom-usage
+    "S324", # hashlib-insecure-hash-function
+    "S608", # hardcoded-sql-expression
+    "S701", # jinja2-autoescape-false
+    "SIM105", # suppressible-exception
+    "SIM110", # reimplemented-builtin
+    "SIM115", # open-file-with-context-handler
+    "TD003", # missing-todo-link
+    "TRY002", # raise-vanilla-class
+    "TRY003", # raise-vanilla-args
+    "TRY300", # try-consider-else
+    "TRY401", # verbose-log-message
 ]
 
-# Allow fix for all enabled rules (when `--fix`) is provided.
-fixable = ["ALL"]
 unfixable = [
-    # Do not auto-fix E711 and E712 because sqlalchemy relies on == and !=
+    # Do not auto-fix E711 and E712 because sqlalchemy relies on `==` and `!=`
     # operators for filtering.
-    "E711", # (none-comparison)
-    "E712", # (true-false-comparison)
+    "E711", # none-comparison
+    "E712", # true-false-comparison
 ]
-pydocstyle.convention = "google"
 
-# Allow unused variables when underscore-prefixed.
+pydocstyle.convention = "google"
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.format]
+# Google style guide uses single quote.
 quote-style = "single"
 
 # Like Black, indent with spaces, rather than tabs.
@@ -82,13 +135,13 @@ line-ending = "auto"
 # Enable auto-formatting of code examples in docstrings. Markdown,
 # reStructuredText code/literal blocks and doctests are all supported.
 #
-# This is currently disabled by default, but it is planned for this
-# to be opt-out in the future.
+# This is currently disabled by default, but it is planned for this to be opt-out in the future.
 docstring-code-format = false
 
-# Set the line length limit used when formatting code snippets in
-# docstrings.
+# Set the line length limit used when formatting code snippets in docstrings.
 #
-# This only has an effect when the `docstring-code-format` setting is
-# enabled.
+# This only has an effect when the `docstring-code-format` setting is enabled.
 docstring-code-line-length = "dynamic"
+
+[tool.ruff.lint.isort]
+section-order = ["future", "standard-library",  "third-party", "first-party"]
