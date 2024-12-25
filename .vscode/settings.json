@@ -1,0 +1,21 @@
+{
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+    },
+    "[cpp]": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "[bazel]": {
+        "editor.formatOnSave": false
+    },
+    "editor.formatOnSave": true,
+    "terminal.integrated.defaultProfile.windows": "Cygwin",
+}
