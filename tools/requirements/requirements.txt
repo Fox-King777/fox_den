@@ -18,3 +18,4 @@ termcolor
 ipywidgets
 pygame
 gym[classic_control]
+wheel
