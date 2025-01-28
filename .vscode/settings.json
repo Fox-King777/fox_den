@@ -3,7 +3,8 @@
     "files.insertFinalNewline": true,
     "[python]": {
         "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
+            "source.organizeImports.ruff": "explicit",
+            "source.fixAll": "explicit"
         },
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "charliermarsh.ruff",
@@ -18,4 +19,10 @@
     },
     "editor.formatOnSave": true,
     "terminal.integrated.defaultProfile.windows": "Cygwin",
+    "notebook.formatOnSave.enabled": true,
+    "notebook.codeActionsOnSave": {
+        "notebook.source.fixAll": "explicit",
+        "notebook.source.organizeImports.ruff": "explicit"
+    },
+    "ruff.configuration": "${workspaceFolder}/pyproject.toml",
 }
