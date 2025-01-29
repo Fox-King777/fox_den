@@ -12,10 +12,9 @@ graphviz
 lightgbm
 pylint
 pre-commit
-kaggle-environments
 ruff
 termcolor
 ipywidgets
 pygame
 gym[classic_control]
-wheel
+wheel==0.38.4
