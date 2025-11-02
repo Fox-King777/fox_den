@@ -18,3 +18,5 @@ ipywidgets
 pygame
 gym[classic_control]
 wheel==0.38.4
+scikit-learn
+tqdm
