@@ -15,7 +15,7 @@ pre-commit
 ruff
 termcolor
 ipywidgets
-pygame
+pygame >= 2.5.2
 gym[classic_control]
 wheel==0.38.4
 scikit-learn
