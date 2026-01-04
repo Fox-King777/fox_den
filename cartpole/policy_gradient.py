@@ -1,6 +1,6 @@
 """Module for the policy gradient algorithm."""
 
-import gym
+import gymnasium as gym
 import numpy as np
 import torch
 from torch import nn
@@ -17,7 +17,6 @@ class PolicyNetwork(nn.Module):
         super().__init__()
         self.layers = nn.Sequential(
             nn.Linear(state_size, 128),
-            nn.Dropout(0.5),
             nn.ReLU(),
             nn.Linear(128, 128),
             nn.ReLU(),
@@ -74,9 +73,9 @@ def calculate_discounted_rewards(
 
     discounted_rewards = torch.tensor(discounted_rewards).to(DEVICE)
     if normalize:
-        discounted_rewards = (
-            discounted_rewards - discounted_rewards.mean()
-        ) / discounted_rewards.std()
+        discounted_rewards = (discounted_rewards - discounted_rewards.mean()) / (
+            discounted_rewards.std() + 1e-8
+        )
 
     return discounted_rewards
 
@@ -102,6 +101,7 @@ def update_policy(
     # calculated the gradient of the loss w.r.t. the policy network parameters.
     # stored in .grad attributes of the parameters
     loss.backward()
+    torch.nn.utils.clip_grad_norm_(optimizer.param_groups[0]['params'], max_norm=1.0)
     optimizer.step()
 
     return loss.item()

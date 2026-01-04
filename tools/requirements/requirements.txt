@@ -16,7 +16,7 @@ ruff
 termcolor
 ipywidgets
 pygame >= 2.5.2
-gym[classic_control]
+gymnasium[classic-control] >= 0.28.0
 wheel==0.38.4
 scikit-learn
 tqdm

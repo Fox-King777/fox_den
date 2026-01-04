@@ -4,7 +4,7 @@ import math
 import random
 from collections import deque, namedtuple
 
-import gym
+import gymnasium as gym
 import torch
 import torch.nn as nn
 import torch.optim as optim
